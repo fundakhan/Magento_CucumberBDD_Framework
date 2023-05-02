@@ -65,5 +65,11 @@ public class BasePOM {
         actions.release(element).build().perform();
     }
 
+    public void verifyCustomerAccountPage(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
+        Assert.assertTrue(element.getText().toLowerCase().contains("New Customer Account".toLowerCase()));
+
+
+    }
 
 }
