@@ -1,17 +1,21 @@
 package StepDefinition;
 
+import POM.DialogContent;
 import POM.PurchasePage;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class PurchaseSteps {
 
+    DialogContent dialogContent;
     PurchasePage purchasePage;
 
 
 
     @When("User select any product")
     public void userSelectAnyProduct() {
+        dialogContent = new DialogContent();
         purchasePage = new PurchasePage();
         purchasePage.selectPurchase();
 

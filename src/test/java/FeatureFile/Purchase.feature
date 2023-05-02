@@ -1,7 +1,7 @@
 Feature: Purchase Functionality
 
   Background:
-    Given User is on login page
+    Given User navigates to Luma website
     When User enter admin credentials
     Then User should login successfully
 

@@ -1,7 +1,7 @@
 Feature: Address Functionality
 
   Background:
-    Given User is on login page
+    Given User navigates to Luma website
     When User enter admin credentials
     Then User should login successfully
 
@@ -9,7 +9,8 @@ Feature: Address Functionality
       When User navigate to My Account page
       Then User click on Manage address
       Then User add a new "<phoneNumber>" and "<streetAddress>" and "<city>" and "<state>" and "<zipCode>"
-      Then Success message should be displayed
+      And User change shipping address a new "<phoneNumber>" and "<streetAddress>" and "<city>" and "<state>" and "<zipCode>" with exist information
+      Then Successfully saved message should be displayed
 
       Examples:
         | phoneNumber | streetAddress | city   | state   | zipCode |

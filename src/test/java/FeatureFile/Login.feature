@@ -1,7 +1,7 @@
-Feature:  Login Campus Functionality
+Feature: Luma Login Functionality
 
-  Scenario: Login Admin Account
+  Scenario: Login Functionality with valid credentials
 
-    Given User is on login page
+    Given User navigates to Luma website
     When User enter admin credentials
     Then User should login successfully

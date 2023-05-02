@@ -1,6 +1,7 @@
 package StepDefinition;
 
 import POM.DialogContent;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -31,11 +32,17 @@ public class AddNewAddressSteps {
 
     }
 
-    @Then("Success message should be displayed")
+    @And("User change shipping address a new {string} and {string} and {string} and {string} and {string} with exist information")
+    public void userEditAndAndAndAndWithExistInformation(String phoneNumber, String streetAddress, String city, String state, String zipCode) {
+        dialogContent = new DialogContent();
+        dialogContent.userChangeAddress(phoneNumber, streetAddress, city, state, zipCode);
+    }
+
+    @Then("Successfully saved message should be displayed")
     public void successMessageShouldBeDisplayed() {
 
         dialogContent = new DialogContent();
-        dialogContent.validationSuccessMessage();
+        dialogContent.verifySavedAddress();
 
     }
 

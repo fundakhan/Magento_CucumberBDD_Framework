@@ -14,13 +14,13 @@ public class DialogContent extends BasePOM{
         PageFactory.initElements(BaseDriver.getDriver(),this);
     }
 
-    @FindBy(xpath = "//a[contains(text(),'Sign In')]")
+    @FindBy(partialLinkText = "Sign In")
     private WebElement signInBtn;
 
-    @FindBy(xpath = "//input[@name='login[username]']")
+    @FindBy(id = "email")
     private WebElement usernameInput;
 
-    @FindBy(xpath = "//input[@name='login[password]']")
+    @FindBy(id = "pass")
     private WebElement passwordInput;
 
     @FindBy(xpath = "(//button[@id='send2'])[1]")
@@ -47,26 +47,29 @@ public class DialogContent extends BasePOM{
     @FindBy(css = "button[class='action primary add']")
     private WebElement addNewAddressBtn;
 
+    @FindBy(xpath = "(//a[@class='action edit'])[2]")
+    private WebElement changeShippingAddress;
+
     @FindBy(xpath = "//span[text()='Add New Address']")
     private WebElement validationAddNewAddressPage;
 
 
-    @FindBy(xpath = "//input[@id='telephone']")
+    @FindBy(css = "#telephone")
     private WebElement phoneNumberInput;
 
-    @FindBy(xpath = "//input[@id='street_1']")
+    @FindBy(css = "#street_1")
     private WebElement streetAddressInput;
 
-    @FindBy(xpath = "//input[@id='city']")
+    @FindBy(css = "#city")
     private WebElement cityInput;
 
-    @FindBy(xpath = "//select[@id='region_id']")
+    @FindBy(css = "#region_id")
     private WebElement selectState;
 
-    @FindBy(xpath = "//input[@id='zip']")
+    @FindBy(css = "#zip")
     private WebElement zipCodeInput;
 
-    @FindBy(xpath = "//select[@id='country']")
+    @FindBy(css = "#country")
     private WebElement selectCountry;
 
     @FindBy(css = "button[class='action save primary']")
@@ -74,6 +77,9 @@ public class DialogContent extends BasePOM{
 
     @FindBy(xpath = "//div[text()='You saved the address.']")
     private WebElement successMessage;
+
+    @FindBy(xpath = "//div[text()='You saved the address.']")
+    private WebElement verifySavedAddressMessage;
 
 
 
@@ -86,7 +92,7 @@ public class DialogContent extends BasePOM{
 
     public void validateUserOnLoginPage(){
 
-        waitUntilVisibleAndClickableThenClick(signInBtn);
+        waitUntilClickable(signInBtn);
         wait.until(ExpectedConditions.urlContains("customer/account/login"));
         Assert.assertTrue(usernameInput.isDisplayed());
 
@@ -104,7 +110,7 @@ public class DialogContent extends BasePOM{
 
         wait.until(ExpectedConditions.visibilityOf(usernameInput)).sendKeys(username);
         passwordInput.sendKeys(password);
-        waitUntilVisibleAndClickableThenClick(loginBtn);
+        waitUntilClickable(loginBtn);
     }
 
     public void validateUserSuccessfullyLoggedIn(){
@@ -118,7 +124,7 @@ public class DialogContent extends BasePOM{
 
         welcomeBtn.click();
         myAccountBtn.click();
-        waitUntilVisibleAndClickableThenClick(myAccountValidation);
+        waitUntilClickable(myAccountValidation);
         Assert.assertTrue(myAccountValidation.isDisplayed());
         String expectedResult = "My Account";
         Assert.assertEquals(myAccountValidation.getText(),expectedResult);
@@ -127,8 +133,8 @@ public class DialogContent extends BasePOM{
     public void validationAddNewAddressPage(){
 
         manageAddressBtn.click();
-      //  Assert.assertTrue(validationAddNewAddressPage.isDisplayed());
-        addNewAddressBtn.click();
+
+        verifyPage(validationAddNewAddressPage);
 
 
     }
@@ -136,26 +142,47 @@ public class DialogContent extends BasePOM{
     public void userAddNewAddress(String phoneNumber,String streetAddress,String city,String state,String zipCode){
 
         phoneNumberInput.clear();
-        phoneNumberInput.sendKeys(phoneNumber);
+       waitUntilVisible(phoneNumberInput,phoneNumber);
         streetAddressInput.clear();
-        streetAddressInput.sendKeys(streetAddress);
+        waitUntilVisible(streetAddressInput,streetAddress);
         cityInput.clear();
-        cityInput.sendKeys(city);
+        waitUntilVisible(cityInput,city);
 
-        selectState.click();
+        waitUntilClickable(selectState);
         Select select = new Select(selectState);
         select.selectByVisibleText(state);
 
         zipCodeInput.clear();
-        zipCodeInput.sendKeys(zipCode);
-        saveButton.click();
+        waitUntilVisible(zipCodeInput,zipCode);
+        waitUntilClickable(saveButton);
 
     }
 
-    public void validationSuccessMessage(){
-        String expectedResult = "You saved the address.";
-        Assert.assertTrue(successMessage.isDisplayed());
-        Assert.assertEquals(successMessage.getText(),expectedResult);
+    public void  verifySavedAddress(){
+
+        verifySavedAddress(verifySavedAddressMessage);
+
+    }
+
+    public void userChangeAddress(String phoneNumber,String streetAddress,String city,String state,String zipCode){
+
+        waitUntilClickable(changeShippingAddress);
+
+        phoneNumberInput.clear();
+        waitUntilVisible(phoneNumberInput,phoneNumber);
+        streetAddressInput.clear();
+        waitUntilVisible(streetAddressInput,streetAddress);
+        cityInput.clear();
+        waitUntilVisible(cityInput,city);
+
+        waitUntilClickable(selectState);
+        Select select = new Select(selectState);
+        select.selectByVisibleText(state);
+
+        zipCodeInput.clear();
+        waitUntilVisible(zipCodeInput,zipCode);
+        waitUntilClickable(saveButton);
+
     }
 
 }

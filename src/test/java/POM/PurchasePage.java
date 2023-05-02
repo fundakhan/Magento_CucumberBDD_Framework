@@ -1,10 +1,8 @@
 package POM;
 
 import Utils.BaseDriver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -24,8 +22,8 @@ public class PurchasePage extends BasePOM{
     @FindBy(id = "ui-id-4")
     private WebElement womenBtn;
 
-    @FindBy(linkText = "Hoodies & Sweatshirts")
-    private WebElement hoodiesSweatshirtBtn;
+    @FindBy(id = "ui-id-14")
+    private WebElement brasAndTanksBtn;
 
     @FindAll(@FindBy(xpath = "//li[@class='item product product-item']"))
     private List<WebElement> selectItem;
@@ -72,19 +70,19 @@ public class PurchasePage extends BasePOM{
     public void selectPurchase() {
 
         womenBtn.click();
-        hoodiesSweatshirtBtn.click();
+        actionMethod(brasAndTanksBtn);
 
         JavascriptExecutor js = (JavascriptExecutor) BaseDriver.getDriver();
         js.executeScript("window.scrollBy(0,500)");
 
-        waitUntilVisibleAndClickableThenClick(selectItem.get(6));
-        waitUntilVisibleAndClickableThenClick(selectSize.get(1));
+        waitUntilClickable(selectItem.get(6));
+        waitUntilClickable(selectSize.get(1));
         selectColor.click();
-        waitUntilVisibleAndClickableThenClick(addToCartBtn);
+        waitUntilClickable(addToCartBtn);
     }
     public void validationAddToCartMessage(){
 
-        waitUntilVisibleAndClickableThenClick(validationAddToCart);
+        waitUntilClickable(validationAddToCart);
         Assert.assertTrue(validationAddToCart.isDisplayed());
         Assert.assertTrue(validationAddToCart.getText().contains("added".toLowerCase()));
 

@@ -8,8 +8,10 @@ import io.cucumber.java.en.When;
 public class LoginSteps {
 
    DialogContent dialogContent;
-    @Given("User is on login page")
-    public void userIsOnLoginPage() {
+
+    @Given("User navigates to Luma website")
+    public void userNavigatesToLumaWebsite() {
+
         dialogContent = new DialogContent();
 
         dialogContent.validateUserOnLoginPage();
@@ -30,4 +32,6 @@ public class LoginSteps {
 
         dialogContent.validateUserSuccessfullyLoggedIn();
     }
+
+
 }
