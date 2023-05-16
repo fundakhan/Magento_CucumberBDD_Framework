@@ -20,21 +20,5 @@ import org.testng.annotations.Parameters;
 public class Smoke_ExtentReport extends AbstractTestNGCucumberTests {
 
 
-        @BeforeClass(alwaysRun = true)
-        @Parameters(value = "browser")
-        public void beforeClass(String browserName){
-            BaseDriver.getDriver(); // call the setThreadBrowserName method to set the browser
 
-        }
-
-        @AfterClass
-        public static void writeExtentReport(){
-
-            ExtentService.getInstance().setSystemInfo("Username", "Funda Akhan");
-            ExtentService.getInstance().setSystemInfo("Application Name", "Campus App");
-            ExtentService.getInstance().setSystemInfo("Operating System", System.getProperty("os.name").toString());
-            ExtentService.getInstance().setSystemInfo("Department", "QA");
-            ExtentService.getInstance().setSystemInfo("Additional Line", "Description");
-
-        }
 }
