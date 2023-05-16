@@ -13,10 +13,11 @@ import org.testng.annotations.Parameters;
 @CucumberOptions(
         tags = "@Smoke",
         features = {"src/test/java/FeatureFile"},
-        glue = {"StepDefinition"}
+        glue = {"StepDefinition"},
+        plugin = {"pretty","html:target/site/cucumber-pretty","json:target/cucumber/cucumber.json"}
 
 )
-@Listeners({ExtentITestListenerClassAdapter.class})
+//@Listeners({ExtentITestListenerClassAdapter.class})
 public class Smoke_ExtentReport extends AbstractTestNGCucumberTests {
 
 
