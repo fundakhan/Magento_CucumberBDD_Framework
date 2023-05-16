@@ -1,5 +1,5 @@
 Feature: Account Functionality
-
+@Smoke
   Scenario:Account Create
     Given User navigates to Luma website
     And Click to Create Account Menu button

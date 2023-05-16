@@ -67,7 +67,23 @@
             <scope>test</scope>
         </dependency>
 
-
     </dependencies>
+
+    <!-- To show Jenkins where to run -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <includes>
+                        <!-- To show Jenkins which class we want to run -->
+                        <include>src/test/java/Runners/Smoke_ExtentReport.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

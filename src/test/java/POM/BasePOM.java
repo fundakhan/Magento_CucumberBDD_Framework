@@ -62,7 +62,7 @@ public class BasePOM {
 
 
         Actions actions = new Actions(BaseDriver.getDriver());
-        actions.release(element).build().perform();
+        actions.moveToElement(element).build().perform();
     }
 
     public void verifyCustomerAccountPage(WebElement element){
